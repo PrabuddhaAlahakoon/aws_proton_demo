@@ -10,7 +10,15 @@ terraform {
 }
 
 provider "aws" {
-  region                   = "us-east-1"
-  shared_credentials_files = ["~/.aws/credentials"]
-  profile                  = "eqvika-demo"
+  region = var.aws_region
+  default_tags {
+    tags = {
+      "proton:environment" = var.environment.name
+    }
+  }
+}
+
+variable "aws_region" {
+  type    = string
+  default = "us-east-1"
 }
